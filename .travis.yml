@@ -1,6 +1,22 @@
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install --no-install-recommends latexmk texlive-latex-base
+sudo: required # necessary to use Trusty
+dist: trusty
+
+cache: apt
+
+addons:
+  apt:
+    packages:
+      - latexmk
+
+      - texlive-latex-base
+      - texlive-fonts-recommended
+      - texlive-lang-cyrillic
+
+      - texlive-latex-recommended
+      - texlive-latex-extra # comment
+      - texlive-science # physics
+
+      - latex-xcolor # xcolor
 
 script:
   - make wipe
