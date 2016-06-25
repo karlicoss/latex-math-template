@@ -17,7 +17,12 @@ addons:
       - texlive-science # physics
 
       - latex-xcolor # xcolor
+      
+
+      - hunspell
+      - hunspell-ru
 
 script:
   - make wipe
   - make build
+  - make spellcheck

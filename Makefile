@@ -32,3 +32,15 @@ wipe:
 .PHONY: export
 export: build
 	zip demo.zip $(NAME) build/demo.pdf
+
+
+.PHONY: spellcheck
+spellcheck:
+	# -l: print list of errors
+	# -t: laTex
+	# -i: encoding
+	# -d: personal dictionaly (/usr/share/hunspell)
+	hunspell -l \
+			 -t \
+			 -i utf-8 \
+			 -d 'ru_RU,en_US' $(NAME)
