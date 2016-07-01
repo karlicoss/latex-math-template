@@ -1,7 +1,9 @@
-NAME      := demo.tex
-BUILD_DIR := build
+NAME        := demo.tex
+OUTPUT_NAME := demo_gerasimovd
 
-ARGS = -outdir=$(BUILD_DIR) -shell-escape -pdf
+BUILD_DIR := build
+BASE_ARGS := -outdir=$(BUILD_DIR) -jobname=$(OUTPUT_NAME)
+ARGS      := $(BASE_ARGS) -shell-escape -pdf
 
 ifdef TRAVIS
 	ARGS += -halt-on-error
@@ -21,12 +23,12 @@ preview:
 
 .PHONY: clean
 clean:
-	latexmk -outdir=$(BUILD_DIR) -c
+	latexmk $(BASE_ARGS) -c $(NAME) # latexmk requires name even for clean for some reason
 
 
 .PHONY: wipe
 wipe:
-	latexmk -outdir=$(BUILD_DIR) -C
+	latexmk $(BASE_ARGS) -C $(NAME) # latexmk requires name even for clean for some reason
 
 
 .PHONY: export
