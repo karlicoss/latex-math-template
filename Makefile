@@ -36,13 +36,26 @@ export: build
 	zip demo.zip $(NAME) build/demo.pdf
 
 
-.PHONY: spellcheck
-spellcheck:
-	# -l: print list of errors
-	# -t: laTex
-	# -i: encoding
-	# -d: personal dictionaly (/usr/share/hunspell)
-	hunspell -l \
-			 -t \
-			 -i utf-8 \
-			 -d 'ru_RU,en_US' $(NAME)
+ASPELL_ARGS := --mode=tex --home-dir=aspell
+# TODO : encoding, specific dictionaries
+
+# misc:
+# --tex-check-comments, --dont-tex-check-comments
+#        Check TeX comments.
+
+# --add-tex-command=<list>, --rem-tex-command=<list>
+#        Add or Remove a list of TeX commands.
+
+
+.PHONY: aspelli
+aspelli:
+	aspell  \
+			$(ASPELL_ARGS) \
+			-c $(NAME)
+
+
+.PHONY: aspell
+aspell:
+	aspell list \
+		   $(ASPELL_ARGS) \
+		   < $(NAME) # aspell list wants piped input
