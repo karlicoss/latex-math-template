@@ -59,3 +59,7 @@ aspell:
 	aspell list \
 		   $(ASPELL_ARGS) \
 		   < $(NAME) # aspell list wants piped input
+
+.PHONY: aspell-ci
+aspell-ci:
+	./ci.sh $(ASPELL_ARGS) $(NAME)	
